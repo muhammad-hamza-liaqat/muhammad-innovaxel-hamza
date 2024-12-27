@@ -1,4 +1,6 @@
 const statusCodes = require("http-status-codes")
+const jwt = require("jsonwebtoken")
+
 const { HTTPError, HTTPResponse } = require("../utils/response")
 const User = require("../models/user.model");
 const { hashPassword, comparePassword } = require("../utils/bcrypt");
@@ -36,10 +38,16 @@ const loginUser = async (req, res) => {
     }
     const checkPassword = await comparePassword(password, isUserValid.password)
     if (!checkPassword) {
-        error = new HTTPError("invalid email or password 2", statusCodes.CONFLICT)
+        error = new HTTPError("invalid email or password", statusCodes.CONFLICT)
         return res.status(statusCodes.CONFLICT).json(error)
     }
-    response = new HTTPResponse("user login successfully!", statusCodes.OK)
+    const accessToken = jwt.sign({ id: isUserValid?._id, userName: isUserValid?.name, role: isUserValid?.role }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.JWT_EXPIRY })
+    const info = {
+        id: isUserValid?._id,
+        email: isUserValid?.email,
+        token: accessToken
+    }
+    response = new HTTPResponse("user login successfully!", info)
     return res.status(statusCodes.OK).json(response)
 }
 

@@ -8,4 +8,5 @@ adminMovieRoutes.post("/add-movie", validationCatches(addMovieValidation), catch
 adminMovieRoutes.delete("/delete-movie/:id", catchAsyncErrors(adminController.deleteMovie))
 adminMovieRoutes.patch("/edit-movie/:id", catchAsyncErrors(adminController.updateMovie))
 
+
 module.exports = adminMovieRoutes

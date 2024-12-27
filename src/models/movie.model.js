@@ -5,7 +5,7 @@ const movieSchema = new mongoose.Schema(
         title: {
             type: String,
             trim: true,
-            unique: true
+            unique: true,
         },
         description: {
             type: String,
@@ -47,8 +47,14 @@ const movieSchema = new mongoose.Schema(
         },
         userId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        }
+            ref: "User",
+        },
+        showtimes: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Showtime",
+            },
+        ],
     },
     {
         timestamps: true,

@@ -1,6 +1,7 @@
 const statusCode = require('http-status-codes')
 const { HTTPResponse, HTTPError } = require('../utils/response')
 const Movie = require('../models/movie.model')
+const Showtime = require("../models/showTime.model")
 
 const addMovie = async (req, res) => {
     let response
@@ -30,6 +31,7 @@ const addMovie = async (req, res) => {
         posterUrl,
         trailerUrl,
     });
+    await newMovie.save();;
     response = new HTTPResponse("Movie created successfully", newMovie)
     return res.status(statusCode.CREATED).json(response)
 }
@@ -65,6 +67,17 @@ const updateMovie = async (req, res) => {
     const response = new HTTPResponse("Movie updated successfully", updatedMovie);
     return res.status(statusCode.OK).json(response);
 };
+
+const getAllMovies = async (req, res) => {
+    let error, response;
+    const movies = await Movie.find();
+    if (!movies || movies.length === 0) {
+        error = new HTTPError("No Movies found", statusCode.NOT_FOUND)
+        return res.status(statusCode.NOT_FOUND).json(error)
+    }
+    response = new HTTPResponse("Movies fetched Successfully", movies)
+    return res.status(statusCode.OK).json(response)
+}
 
 
 module.exports = {

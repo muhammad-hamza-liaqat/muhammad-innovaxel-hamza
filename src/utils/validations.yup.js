@@ -1,5 +1,8 @@
 const yup = require("yup");
+const mongoose = require("mongoose")
 const StatusCodes = require("http-status-codes")
+
+const isValidObjectId = (value) => mongoose.Types.ObjectId.isValid(value);
 
 const signUpValidation = (req, res, next) => {
     const schema = yup.object({
@@ -104,8 +107,43 @@ const addMovieValidation = (req, res, next) => {
     }
 };
 
+const addShowtimeValidation = (req, res, next) => {
+    const schema = yup.object({
+        movieId: yup
+            .string()
+            .required("Movie ID is required")
+            .test("is-valid-objectid", "Invalid Movie ID format", (value) =>
+                isValidObjectId(value)
+            ),
+        cinema: yup
+            .string()
+            .trim()
+            .required("Cinema name is required")
+            .min(3, "Cinema name must be at least 3 characters long")
+            .max(100, "Cinema name must not exceed 100 characters"),
+        dateTime: yup
+            .date()
+            .required("Date and time are required")
+            .typeError("Date and time must be a valid date")
+            .min(new Date(), "Date and time must be in the future"),
+        price: yup
+            .number()
+            .required("Price is required")
+            .positive("Price must be a positive number")
+            .max(1000, "Price must not exceed 1000"),
+    });
+
+    try {
+        schema.validateSync(req.body, { abortEarly: false });
+        next();
+    } catch (error) {
+        res.status(400).json({ errors: error.errors });
+    }
+};
+
 module.exports = {
     signUpValidation,
     loginUserValidation,
-    addMovieValidation
+    addMovieValidation,
+    addShowtimeValidation
 };

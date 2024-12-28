@@ -4,7 +4,9 @@ const reservationRoutes = express.Router()
 const { validationCatches, catchAsyncErrors } = require("../../utils/tryCatch")
 const reservationController = require("../../controller/reservation.controller")
 const { reservationValidation } = require("../../utils/validations.yup")
+const authorization = require("../../middleware/authorization")
 
+reservationRoutes.use(authorization("user"))
 reservationRoutes.post("/purchase-ticket", validationCatches(reservationValidation), catchAsyncErrors(reservationController.makeReservation))
 
 module.exports = reservationRoutes

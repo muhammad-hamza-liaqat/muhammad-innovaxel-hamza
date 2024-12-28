@@ -27,8 +27,7 @@ const getAllMovies = async (req, res) => {
 
 const viewMyReservations = async (req, res) => {
     const user = req.user;
-    console.log(user?.id)
-
+    let error, response;
     const userReservations = await Reservation.find({ user: user?.id })
         .populate({
             path: "showTime",
@@ -47,14 +46,11 @@ const viewMyReservations = async (req, res) => {
         });
 
     if (!userReservations || userReservations.length === 0) {
-        return res.status(404).json({ message: "No reservations found" });
+        error = new HTTPError("no reservation found againt your account", statusCode.OK)
+        return res.status(statusCode.OK).json(error)
     }
-
-    return res.status(200).json({
-        message: "Reservations fetched successfully",
-        data: userReservations,
-    });
-
+    response = new HTTPResponse("Reservation fetched successfully", userReservations)
+    return res.status(statusCode.OK).json(response)
 };
 
 module.exports = {

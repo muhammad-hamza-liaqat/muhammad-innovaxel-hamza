@@ -5,12 +5,14 @@ const requestLogger = (req, res, next) => {
     const clientIp = req.ip || req.connection.remoteAddress;
 
     console.info(`
-    =============================
-    [${currentTime}] Request Logged
-    -----------------------------
+                ${url}
+    =========================================
+                 Request Logged
+    -----------------------------------------
     Method:         ${method}
     URL:            ${url}
     Client IP:      ${clientIp}
+    timestamp:      [${currentTime}]
     =============================
     `);
 

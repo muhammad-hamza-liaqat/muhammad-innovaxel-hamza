@@ -129,8 +129,62 @@ const addShowtimeValidation = (req, res, next) => {
         price: yup
             .number()
             .required("Price is required")
-            .positive("Price must be a positive number")
-            .max(1000, "Price must not exceed 1000"),
+            .positive("Price must be a positive number"),
+        totalTicket: yup
+            .number()
+            .required("Total Tickets are required")
+            .positive("Total Tickets must be positive number")
+    });
+
+    try {
+        schema.validateSync(req.body, { abortEarly: false });
+        next();
+    } catch (error) {
+        res.status(400).json({ errors: error.errors });
+    }
+};
+
+const reservationValidation = (req, res, next) => {
+    const schema = yup.object({
+        showTime: yup
+            .string()
+            .test(
+                "is-valid-object-id",
+                "Invalid showtime ID format",
+                (value) => isValidObjectId(value)
+            )
+            .required("showTimw ID is required"),
+        movie: yup
+            .string()
+            .test(
+                "is-valid-object-id",
+                "Invalid movie ID format",
+                (value) => isValidObjectId(value)
+            )
+            .required("Movie ID is required"),
+        user: yup
+            .string()
+            .nullable() // Allow null for guests
+            .test(
+                "is-valid-object-id",
+                "Invalid user ID format",
+                (value) => !value || isValidObjectId(value) // Validate only if user is provided
+            ),
+        customerName: yup
+            .string()
+            .trim()
+            .required("Customer name is required")
+            .min(3, "Customer name must be at least 3 characters long"),
+        customerEmail: yup
+            .string()
+            .trim()
+            .email("Enter a valid email address")
+            .required("Customer email is required"),
+        seats: yup
+            .number()
+            .required("Seats are required")
+            .positive("Seats must be a positive number")
+            .integer("Seats must be an integer"),
     });
 
     try {
@@ -145,5 +199,6 @@ module.exports = {
     signUpValidation,
     loginUserValidation,
     addMovieValidation,
-    addShowtimeValidation
+    addShowtimeValidation,
+    reservationValidation
 };

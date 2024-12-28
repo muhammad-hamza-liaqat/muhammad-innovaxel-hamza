@@ -4,7 +4,7 @@ const Movie = require('../models/movie.model')
 const Showtime = require("../models/showTime.model")
 
 const addShowTime = async (req, res) => {
-    const { movieId, cinema, dateTime, price } = req.body;
+    const { movieId, cinema, dateTime, price, totalTicket } = req.body;
 
     const movie = await Movie.findById(movieId);
     if (!movie) {
@@ -12,7 +12,7 @@ const addShowTime = async (req, res) => {
         return res.status(statusCode.BAD_REQUEST).json(error);
     }
 
-    const newShowTime = new Showtime({ movieId, cinema, dateTime, price });
+    const newShowTime = new Showtime({ movie: movieId, cinema, dateTime, price, totalTicket });
     const savedShowTime = await newShowTime.save();
 
     movie.showtimes.push(savedShowTime._id);

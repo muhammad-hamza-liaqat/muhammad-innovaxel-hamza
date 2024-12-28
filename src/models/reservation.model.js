@@ -2,18 +2,17 @@ const mongoose = require("mongoose");
 
 const reservationSchema = new mongoose.Schema(
     {
-        showTime: {
+        showTime: { 
             type: mongoose.Schema.Types.ObjectId,
             ref: "Showtime",
         },
         movie: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Movie",
-            required: true,
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            ref: "User",
         },
         customerName: {
             type: String,
@@ -35,21 +34,24 @@ const reservationSchema = new mongoose.Schema(
     }
 );
 
-// Middleware to ensure showtime and movie relationship consistency
+// Middleware to ensure showTime and movie relationship consistency
 reservationSchema.pre("save", async function (next) {
-    const Showtime = mongoose.model("Showtime");
-    const Movie = mongoose.model("Movie");
+    try {
+        const Showtime = mongoose.model("Showtime");
 
-    const showtime = await Showtime.findById(this.showtime);
-    if (!showtime) {
-        throw new Error("Associated showtime not found");
+        const showtime = await Showtime.findById(this.showTime); // Use correct casing
+        if (!showtime) {
+            return next(new Error("Associated showtime not found"));
+        }
+
+        if (this.movie.toString() !== showtime.movie.toString()) {
+            return next(new Error("The movie ID does not match the showtime's associated movie"));
+        }
+
+        next();
+    } catch (err) {
+        next(err); 
     }
-
-    if (this.movie.toString() !== showtime.movie.toString()) {
-        throw new Error("The movie ID does not match the showtime's associated movie");
-    }
-
-    next();
 });
 
 const Reservation = mongoose.model("Reservation", reservationSchema);

@@ -7,7 +7,7 @@ const publicRoutes = require("./publicRoutes/auth.routes")
 const adminMovieRoutes = require("./adminRoutes/adminMovie.routes")
 const showTimeRoutes = require("./adminRoutes/showTime.routes")
 const reservationRoutes = require("./userRoutes/reservation.routes")
-const userRoutes = require("./userRoutes/user.movie.routes")
+const userRoutes = require("./userRoutes/user.routes")
 
 myAppRoutes.use("/auth", publicRoutes)
 

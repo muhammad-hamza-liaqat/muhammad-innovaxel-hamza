@@ -8,15 +8,17 @@ const adminMovieRoutes = require("./adminRoutes/adminMovie.routes")
 const showTimeRoutes = require("./adminRoutes/showTime.routes")
 const reservationRoutes = require("./userRoutes/reservation.routes")
 const userRoutes = require("./userRoutes/user.routes")
+const revenueRoutes = require("./adminRoutes/revenue.routes")
 
 myAppRoutes.use("/auth", publicRoutes)
 
-myAppRoutes.use(auth)
+// myAppRoutes.use(auth)
 myAppRoutes.use("/user", userRoutes)
 myAppRoutes.use("/user/reservation", reservationRoutes)
 
-myAppRoutes.use(authorization("admin"))
+// myAppRoutes.use(authorization("admin"))
 myAppRoutes.use("/show", showTimeRoutes)
 myAppRoutes.use("/admin", adminMovieRoutes)
+myAppRoutes.use("/admin/revenue", revenueRoutes)
 
 module.exports = myAppRoutes

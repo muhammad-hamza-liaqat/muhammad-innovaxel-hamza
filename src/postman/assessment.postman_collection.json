@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "34e177c3-d515-408e-938c-24a2d321b82c",
+		"name": "assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30134387",
+		"_collection_link": "https://grey-escape-224058.postman.co/workspace/lambda-functions~01e0e691-088a-4342-8d89-5465faf36baf/collection/30134387-34e177c3-d515-408e-938c-24a2d321b82c?action=share&source=collection_link&creator=30134387"
+	},
+	"item": [
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Saad\",\r\n    \"email\":\"saad3032619@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/auth/sign-up",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"auth",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n//     \"email\":\"mh408800@gmail.com\",\r\n//     \"password\":\"123456\"\r\n// }\r\n\r\n// // admin\r\n\r\n{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"adminSecure101\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/add-movie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYThmNmQ3MTI3YWViMWIzNDY4NiIsInVzZXJOYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzUzODQyMTYsImV4cCI6MTczNTQyMDIxNn0.b1-yCMXGinI70jyf3VGwhkJr2tNkKaJPoPjQQyt4-aY",
+						"description": "admin auth token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Mirzapur\",\r\n    \"description\": \"A skilled thief leads a heist within the dream world.\",\r\n    \"releaseDate\": \"2010-07-16\",\r\n    \"genre\": [\r\n        \"Sci-Fi\",\r\n        \"Thriller\"\r\n    ],\r\n    \"director\": \"Christopher Nolan\",\r\n    \"cast\": [\r\n        {\r\n            \"name\": \"Leonardo DiCaprio\",\r\n            \"role\": \"Cobb\"\r\n        },\r\n        {\r\n            \"name\": \"Joseph Gordon-Levitt\",\r\n            \"role\": \"Arthur\"\r\n        }\r\n    ],\r\n    \"rating\": 8.8,\r\n    \"duration\": 148,\r\n    \"posterUrl\": \"https://example.com/poster.jpg\",\r\n    \"trailerUrl\": \"https://example.com/mirzapur.mp4\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/admin/add-movie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"admin",
+						"add-movie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/delete-movie",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYThmNmQ3MTI3YWViMWIzNDY4NiIsInVzZXJOYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzUzODQyMTYsImV4cCI6MTczNTQyMDIxNn0.b1-yCMXGinI70jyf3VGwhkJr2tNkKaJPoPjQQyt4-aY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/admin/delete-movie/676fdcd06d7127aeb1b34698",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"admin",
+						"delete-movie",
+						"676fdcd06d7127aeb1b34698"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/edit-movie",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYThmNmQ3MTI3YWViMWIzNDY4NiIsInVzZXJOYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzUzODQyMTYsImV4cCI6MTczNTQyMDIxNn0.b1-yCMXGinI70jyf3VGwhkJr2tNkKaJPoPjQQyt4-aY",
+						"description": "admin auth token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rating\": 0.7,\r\n    \"duration\": 121,\r\n    \"trailerUrl\": \"https://localhost:3000/api\",\r\n    \"posterUrl\": \"http://localhost:3001/api\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/admin/edit-movie/676fdd9b6d7127aeb1b346a7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"admin",
+						"edit-movie",
+						"676fdd9b6d7127aeb1b346a7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/show/add-showtime",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYThmNmQ3MTI3YWViMWIzNDY4NiIsInVzZXJOYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzUzODQ3ODAsImV4cCI6MTczNTQyMDc4MH0.KS7isw75_HKOJZhcSdPeLPqqqd-Xqbd6TfMpYGY7BZ8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"movieId\": \"676fdcac6d7127aeb1b34692\",\r\n    \"cinema\": \"Evening show Inception-1\",\r\n    \"dateTime\": \"2024-12-30T14:00:00\",\r\n    \"totalTicket\": 10,\r\n    \"price\": 5000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/show/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"show",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/get all movies",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYWVhNmQ3MTI3YWViMWIzNDY4YSIsInVzZXJOYW1lIjoiSGFtemEiLCJyb2xlIjoidXNlciIsImlhdCI6MTczNTM4NDcyNCwiZXhwIjoxNzM1NDIwNzI0fQ.LxIzQZqYrAahp0jaLt0uFi8VF_fmt8mGAMLH_Ioauys",
+						"description": "user access token",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/user/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"user",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/viewReservation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYWVhNmQ3MTI3YWViMWIzNDY4YSIsInVzZXJOYW1lIjoiSGFtemEiLCJyb2xlIjoidXNlciIsImlhdCI6MTczNTM4NDcyNCwiZXhwIjoxNzM1NDIwNzI0fQ.LxIzQZqYrAahp0jaLt0uFi8VF_fmt8mGAMLH_Ioauys",
+						"description": "user auth token",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZlMWQ3NmQ3MTI3YWViMWIzNDZlNiIsInVzZXJOYW1lIjoiU2FhZCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM1Mzg1NjA4LCJleHAiOjE3MzU0MjE2MDh9.OfWzcduiEbO126cGsZevGdaZUaF-p5aACjIpVvsLPnw",
+						"description": "other user 2 auth token",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/user/my-reservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"user",
+						"my-reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/make reservation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYWVhNmQ3MTI3YWViMWIzNDY4YSIsInVzZXJOYW1lIjoiSGFtemEiLCJyb2xlIjoidXNlciIsImlhdCI6MTczNTQ3MzU4NSwiZXhwIjoxNzM1NTA5NTg1fQ.dDKLvYiYOEYzbnB9u20yiZsbBUz39kosl9sZMTZQQfE",
+						"description": "user auth token",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"showTime\": \"676fdfdb6d7127aeb1b346d7\",\r\n    \"movie\": \"676fdcac6d7127aeb1b34692\",\r\n    \"customerName\": \"Muhammad Hamza\",\r\n    \"customerEmail\": \"mh408800@gmail.com\",\r\n    \"seats\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/user/reservation/purchase-ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"user",
+						"reservation",
+						"purchase-ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/get total revenue",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYThmNmQ3MTI3YWViMWIzNDY4NiIsInVzZXJOYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzU0NzM3MjAsImV4cCI6MTczNTUwOTcyMH0.9YCDMWk2TLNmUMim1u91N2ePjNENH7X5ZV-3hrVHE0A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/admin/revenue/total-revenue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"admin",
+						"revenue",
+						"total-revenue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin/get revenue with details of movies",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmZkYThmNmQ3MTI3YWViMWIzNDY4NiIsInVzZXJOYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzU0NzM3MjAsImV4cCI6MTczNTUwOTcyMH0.9YCDMWk2TLNmUMim1u91N2ePjNENH7X5ZV-3hrVHE0A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/api/admin/revenue/top-movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"admin",
+						"revenue",
+						"top-movies"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

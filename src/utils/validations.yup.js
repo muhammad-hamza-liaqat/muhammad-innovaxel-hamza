@@ -195,10 +195,30 @@ const reservationValidation = (req, res, next) => {
     }
 };
 
+const showTimeValidation = (req, res, next) => {
+    const schema = yup.object({
+        movieId: yup
+            .string()
+            .test(
+                "is-valid-object-id",
+                "Invalid showtime ID format",
+                (value) => isValidObjectId(value)
+            )
+            .required("movieId is required"),
+    });
+
+    try {
+        schema.validateSync(req.body, { abortEarly: false });
+        next();
+    } catch (error) {
+        res.status(400).json({ errors: error.errors });
+    }
+};
 module.exports = {
     signUpValidation,
     loginUserValidation,
     addMovieValidation,
     addShowtimeValidation,
-    reservationValidation
+    reservationValidation,
+    showTimeValidation
 };

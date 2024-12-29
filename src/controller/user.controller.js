@@ -2,6 +2,8 @@ const statusCode = require("http-status-codes")
 const Movie = require("../models/movie.model")
 const { HTTPError, HTTPResponse } = require("../utils/response")
 const Reservation = require("../models/reservation.model")
+const mongoose = require("mongoose")
+const Showtime = require("../models/showTime.model")
 
 
 const getAllMovies = async (req, res) => {
@@ -53,7 +55,45 @@ const viewMyReservations = async (req, res) => {
     return res.status(statusCode.OK).json(response)
 };
 
+const viewShowTime = async (req, res) => {
+    let error, response;
+    const { movieId } = req.body;
+    const { date } = req.query;
+
+    const objectId = new mongoose.Types.ObjectId(movieId);
+    const query = { movie: objectId };
+    if (date) {
+        if (isNaN(Date.parse(date))) {
+            error = new HTTPError("invalid date format", statusCode.BAD_REQUEST)
+            return res.status(statusCode.BAD_REQUEST).json(error)
+        }
+        const parsedDate = new Date(date);
+        console.log("Parsed Date:", parsedDate);
+        query.dateTime = { $eq: parsedDate };
+    }
+
+
+    const showTimes = await Showtime.find(query).lean();
+    console.log("Query Result for Showtimes:", showTimes);
+
+    if (!showTimes || showTimes.length === 0) {
+        error = new HTTPError("No showtimes found for this movie", statusCode.BAD_REQUEST)
+        return res.status(statusCode.BAD_REQUEST).json(error)
+
+    }
+
+    const formattedShowTimes = showTimes.map(showTime => ({
+        cinema: showTime.cinema,
+        dateTime: showTime.dateTime,
+        price: showTime.price,
+        sold: showTime.sold,
+    }));
+    response = new HTTPResponse("Showtimes fetched successfully", statusCode.OK)
+    return res.status(statusCode.OK).json(response)
+};
+
 module.exports = {
     getAllMovies,
-    viewMyReservations
+    viewMyReservations,
+    viewShowTime
 }

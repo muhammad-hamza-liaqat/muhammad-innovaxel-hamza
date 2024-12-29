@@ -1,10 +1,11 @@
+
 # Movie Reservation System
 
-This is a Movie Reservation System built with Node.js.
+The **Movie Reservation System** is a Node.js-based application that allows users to manage movie reservations efficiently.
 
 ## Installation
 
-To install the project dependencies, run the following command:
+To install the project dependencies, execute the following command:
 
 ```bash
 npm install
@@ -12,10 +13,11 @@ npm install
 
 ## Environment Variables
 
-An `.env.dist` file is included in the codebase. Follow these steps to set up your environment variables:
+The project requires environment variables for configuration. A sample `.env.dist` file is included in the codebase.
 
-1. Copy the contents of the `.env.dist` file.
-2. Create a new file named `.env` in the root directory of the project.
+### Steps to Configure:
+1. Copy the contents of `.env.dist`.
+2. Create a new file named `.env` in the root directory.
 3. Paste the contents and provide the required credentials for the variables.
 
 Example:
@@ -28,79 +30,11 @@ SECRET_KEY=your_secret_key
 
 ## API Endpoints
 
-The following endpoints are available for making requests to the system:
-
-### User Authentication
-
-- **POST** `/api/auth/register`
-
-  - Register a new user.
-  - **Payload:**
-    ```json
-    {
-      "name": "John Doe",
-      "email": "john@example.com",
-      "password": "password123"
-    }
-    ```
-
-- **POST** `/api/auth/login`
-  - Authenticate an existing user.
-  - **Payload:**
-    ```json
-    {
-      "email": "john@example.com",
-      "password": "password123"
-    }
-    ```
-
-### Movies
-
-- **GET** `/api/movies`
-
-  - Fetch a list of available movies.
-
-- **GET** `/api/movies/:id`
-  - Fetch details of a specific movie by ID.
-
-### Reservations
-
-- **POST** `/api/reservations`
-
-  - Create a reservation for a movie.
-  - **Payload:**
-    ```json
-    {
-      "movieId": "123",
-      "userId": "456",
-      "seats": 2
-    }
-    ```
-
-- **GET** `/api/reservations/:userId`
-  - Fetch all reservations for a specific user.
-
-### Admin
-
-- **POST** `/api/admin/movies`
-
-  - Add a new movie to the system (Admin only).
-  - **Payload:**
-    ```json
-    {
-      "title": "Movie Title",
-      "description": "Movie description",
-      "duration": 120,
-      "releaseDate": "2024-01-01"
-    }
-    ```
-
-- **DELETE** `/api/admin/movies/:id`
-  - Delete a movie from the system (Admin only).
+The Postman collection is included in the **dev** branch and has also been sent via email as mentioned in the assessment sheet.
 
 ## Running the Project
 
-To start the project, run:
+To start the project, use:
 
 ```bash
 npm start
@@ -111,6 +45,24 @@ For development purposes, use:
 ```bash
 npm run dev
 ```
+
+## Adding Access Token
+
+In Postman:
+1. Open the **Headers** section.
+2. Set `Authorization` as the key.
+3. Paste the token as the value.
+
+## Admin User
+
+When the project is run for the first time, seeders will automatically create an admin user. The credentials for the admin user are available in the `/login` request of the Postman collection.
+
+## `.env.dist`
+
+All the required environment variables are present in the `.env.dist` file. To configure:
+1. Create a `.env` file in the root directory.
+2. Copy and paste the fields from `.env.dist`.
+3. Replace placeholder values with your actual credentials.
 
 ## License
 

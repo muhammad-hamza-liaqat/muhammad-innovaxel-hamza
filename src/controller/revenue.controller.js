@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 const statusCode = require("http-status-codes");
 const { HTTPResponse, HTTPError } = require("../utils/response");
 
-const Showtime = require("../models/showTime.model");
-const Movie = require("../models/movie.model");
-const User = require("../models/user.model");
 const Reservation = require("../models/reservation.model");
 
 const getTotalRevenue = async (req, res) => {

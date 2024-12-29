@@ -12,11 +12,11 @@ const revenueRoutes = require("./adminRoutes/revenue.routes")
 
 myAppRoutes.use("/auth", publicRoutes)
 
-// myAppRoutes.use(auth)
+myAppRoutes.use(auth)
 myAppRoutes.use("/user", userRoutes)
 myAppRoutes.use("/user/reservation", reservationRoutes)
 
-// myAppRoutes.use(authorization("admin"))
+myAppRoutes.use(authorization("admin"))
 myAppRoutes.use("/show", showTimeRoutes)
 myAppRoutes.use("/admin", adminMovieRoutes)
 myAppRoutes.use("/admin/revenue", revenueRoutes)
